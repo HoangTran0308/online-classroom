@@ -29,9 +29,32 @@ exports.protect = async (req, res, next) => {
   }
 };
 
+// Cho phép không có token vẫn đi tiếp, nhưng nếu có token hợp lệ thì nạp req.user
+exports.optionalAuth = async (req, res, next) => {
+  try {
+    const header = req.headers.authorization || '';
+    const token = header.startsWith('Bearer ') ? header.split(' ')[1] : null;
+
+    if (token) {
+      try {
+        const payload = jwt.verify(token, process.env.JWT_SECRET);
+        const user = await User.findById(payload.id);
+        if (user && user.isActive) {
+          req.user = user;
+        }
+      } catch {
+        // bỏ qua nếu token lỗi
+      }
+    }
+    next();
+  } catch {
+    next();
+  }
+};
+
 // Kiểm tra vai trò, ví dụ authorize('teacher') hoặc authorize('teacher', 'admin')
 exports.authorize = (...roles) => (req, res, next) => {
-  if (!roles.includes(req.user.role)) {
+  if (!req.user || !roles.includes(req.user.role)) {
     return res.status(403).json({ message: 'Bạn không có quyền thực hiện thao tác này' });
   }
   next();

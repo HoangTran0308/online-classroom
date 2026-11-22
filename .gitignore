@@ -1,4 +1,25 @@
+# Dependencies
 node_modules/
+client/node_modules/
+server/node_modules/
+
+# Environment Variables
 .env
-server/uploads/*
+.env.local
+server/.env
+
+# Production build outputs
 dist/
+client/dist/
+build/
+
+# Uploaded media & documents (preserve gitkeep)
+server/uploads/*
+!server/uploads/.gitkeep
+
+# Logs and OS files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+Thumbs.db

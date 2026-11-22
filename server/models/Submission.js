@@ -7,6 +7,7 @@ const submissionSchema = new mongoose.Schema(
     student: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     text: { type: String, default: '' },
     fileUrl: { type: String, default: '' },
+    fileName: { type: String, default: '' },
     score: { type: Number, default: null },
     feedback: { type: String, default: '' },
     gradedAt: { type: Date },

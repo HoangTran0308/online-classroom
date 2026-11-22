@@ -1,0 +1,25 @@
+{
+  "name": "online-classroom-mern",
+  "version": "1.0.0",
+  "description": "Online Classroom Management System - MERN Stack Project",
+  "scripts": {
+    "start": "node server/server.js",
+    "install-all": "npm --prefix server install && npm --prefix client install",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "start:server": "npm --prefix server start",
+    "seed": "npm --prefix server run seed",
+    "report": "npm --prefix server run report",
+    "build:client": "npm --prefix client run build"
+  },
+  "keywords": [
+    "mern",
+    "mongodb",
+    "express",
+    "react",
+    "node",
+    "online-classroom"
+  ],
+  "author": "",
+  "license": "ISC"
+}
